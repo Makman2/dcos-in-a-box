@@ -1,0 +1,14 @@
+- CentOS 7 Minimum ISO
+- American language + keyboard
+- Partioning:
+  - EFI system partition (200 MiB)
+  - Normal boot partition (ext4, no LVM) (500MiB)
+  - Single Partition with ext4 only (no LVM) (rest of disk space)
+- Security policy: General purpose
+- Root password: dcos-rocks
+- No users (just root)
+
+- BIOS:
+  - Set CEST / German Time
+  - Set fan on "Cool" Profile
+  - Save profile as "DC/OS on CentOS 7"
