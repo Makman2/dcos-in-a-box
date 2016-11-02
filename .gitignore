@@ -1,0 +1,6 @@
+# Generated DC/OS build artifacts
+dcos-genconf.*.tar
+genconf/serve/
+
+# Templated files
+genconf/config.yaml
