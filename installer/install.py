@@ -1,6 +1,5 @@
 #!/bin/bash
 from getpass import getpass
-from ipaddress import IPv4Network
 import sys
 
 from networking import scan
@@ -15,7 +14,7 @@ def main():
     print("AND BE SURE TO TURN ON ALL NODES!")
     print("")
 
-    print("Proceed with installing?", end='')
+    print("Proceed with installing? ", end='')
     if not ask_for_permission():
         return 255
 
@@ -41,9 +40,9 @@ def main():
     return 0
 
 def find_nodes():
-    masters = scan('1.0.10.0/255', verbose=True)
-    private_agents = scan('1.0.20.0/255', verbose=True)
-    public_agents = scan('1.0.30.0/255', verbose=True)
+    masters = scan(('1.0.10.' + str(i) for i in range(256)), verbose=True)
+    private_agents = scan(('1.0.20.' + str(i) for i in range(256)), verbose=True)
+    public_agents = scan(('1.0.30.' + str(i) for i in range(256)), verbose=True)
     return masters, private_agents, public_agents
 
 def print_found_nodes(masters, private_agents, public_agents):
@@ -59,7 +58,7 @@ def print_found_nodes(masters, private_agents, public_agents):
     for agent in public_agents:
         print('- {}'.format(agent))
 
-def build_dcos_package(masters)
+def build_dcos_package(masters):
     print('Building DC/OS package...')
 
     template_file('genconf/config.yaml.jinja', 'genconf/config.yaml', masters=masters)

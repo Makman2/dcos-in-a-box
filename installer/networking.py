@@ -1,19 +1,19 @@
+from ipaddress import IPv4Network
 from subprocess import call
 
 
 def ping(address):
     return call(['ping', '-c', '1', address]) == 0
 
-def scan(ip_range, verbose=False):
-    network = IPv4Network(ip_range)
+def scan(addresses, verbose=False):
     ips = []
-    for host in network:
-        if ping(host.ip_address):
-            ips.append(host.ip_address)
+    for host in addresses:
+        if ping(host):
+            ips.append(host)
             if verbose:
-                print("{}: AVAILABLE".format(host.ip_address))
+                print("{}: AVAILABLE".format(host))
         else:
             if verbose:
-                print("{}: UNAVAILABLE".format(host.ip_address))
+                print("{}: UNAVAILABLE".format(host))
     return ips
 
