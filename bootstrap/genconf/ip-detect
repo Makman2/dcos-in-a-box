@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Enter the network interface here to get the IP address from.
+interface=wlo1
+
+regex="inet ([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})"
+
+if [[ $(ifconfig $interface) =~ $regex ]]
+then
+    echo "${BASH_REMATCH[1]}"
+fi
