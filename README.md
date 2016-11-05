@@ -27,7 +27,7 @@ The DC/OS-IN-A-BOX resource repository
    - Choose a root password that has to be the same on all machines.
 4. Configure CentOS:
    1. Connect to internet.
-   2. Update packages:
+   2. Update packages: // not needed
 
       ```sh
       yum update
@@ -40,13 +40,30 @@ The DC/OS-IN-A-BOX resource repository
       cat /proc/sys/net/ipv4/icmp_echo_ignore_all
       ```
 
-      `0` means that ICMP is enabled, `1` means disabled.
+      `0` means that ICMP is enabled, `1` means disabled. // not needed
 
    4. Configure static IP addresses on each machine:
-     - Bootstrap node: `1.0.0.0`
-     - Master nodes: `1.0.10.0-255`
-     - Private agent nodes: `1.0.20.0-255`
-     - Public agent nodes: `1.0.30.0-255`
+      - Bootstrap node: `1.0.0.0`
+      - Master nodes: `1.0.10.0-255`
+      - Private agent nodes: `1.0.20.0-255`
+      - Public agent nodes: `1.0.30.0-255`
+      For this case create a new static eth0 interface configuration:
+
+      DEVICE=<your-device>
+      TYPE=Ethernet
+      DEFROUTE=yes
+      IPV4_FAILURE_FATAL=no
+      IPV6INIT=no
+      NAME=eth0
+      BOOTPROTO=none
+      ONBOOT=yes
+      NETMASK=255.255.0.0
+      IPADDR=1.0.10.1
+      PEERDNS=yes
+      PEERROUTES=yes
+      NM_CONTROLLED=yes
+
+    5. Install `yum install libselinux-python` // put this into ansible
 
 # Setup
 
